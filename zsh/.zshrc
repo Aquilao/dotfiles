@@ -7,6 +7,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/Users/aquilao/Library/Python/3.8/bin:$PATH
 
 # Aquilao setting
 
@@ -80,12 +81,24 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git msfvenom)
+plugins=(git)
+
+
+plugins=(msfvenom)
+
+# ========== Auto suggestions plugins ========== 
+# Install: type "git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+plugins=(zsh-autosuggestions)
+
+# ========== Syntax highlighting plugins ========== 
+# Install: type "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+plugins=(zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 
 # User configuration
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -107,6 +120,9 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias nmap="nmap.exe"
+alias n="nvim"
+#
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 fpath=(~/.zsh/completion $fpath)
