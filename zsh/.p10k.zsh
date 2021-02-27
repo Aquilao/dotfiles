@@ -11,6 +11,7 @@
     unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
 
     typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+		os_icon
         time
         background_jobs
         context
@@ -26,7 +27,10 @@
         prompt_char
     )
 
-    typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+    typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+		ram
+		battery
+	)
 
     typeset -g POWERLEVEL9K_MODE=awesome-fontconfig
     typeset -g POWERLEVEL9K_ICON_PADDING=none
@@ -57,11 +61,18 @@
     typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
     typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
 
+	##############################[ os_icon: os identifier ]##################################
+	# OS identifier color.
+	typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=red
+    # Custom icon.
+	typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+
     ####################################[ time: current time ]####################################
     typeset -g POWERLEVEL9K_TIME_FOREGROUND=yellow
     typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
     typeset -g POWERLEVEL9K_TIME_PREFIX=''
     typeset -g POWERLEVEL9K_TIME_CONTENT_EXPANSION='%B${P9K_CONTENT}'
+    # typeset -g POWERLEVEL9K_TIME_CONTENT_EXPANSION=' ${P9K_CONTENT}'
 
     #######################[ background_jobs: presence of background jobs ]#######################
     typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=209
@@ -75,7 +86,7 @@
     if (( P9K_SSH )); then
         POWERLEVEL9K_CONTEXT_TEMPLATE='%B%n@%m'
     else
-        POWERLEVEL9K_CONTEXT_TEMPLATE=
+        POWERLEVEL9K_CONTEXT_TEMPLATE='%B%n@%m'
         POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%B%n'
     fi
 
@@ -246,6 +257,28 @@
     typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=green
     typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=red
     typeset -g POWERLEVEL9K_PROMPT_CHAR_CONTENT_EXPANSION='%(#.#.$)'
+
+	###################################[ ram: free RAM ]#######################################
+	# RAM color.
+	typeset -g POWERLEVEL9K_RAM_FOREGROUND=66
+    # Custom icon.
+	typeset -g POWERLEVEL9K_RAM_VISUAL_IDENTIFIER_EXPANSION=''
+	
+	#############################[ battery: internal battery ]#################################
+	# Show battery in red when it's below this level and not connected to power supply.
+  	typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
+    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=160
+    # Show battery in green when it's charging or fully charged.
+    typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=70
+    # Show battery in yellow when it's discharging.
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=178
+    # Battery pictograms going from low to high level of charge.
+	# typeset -g POWERLEVEL9K_BATTERY_STAGES=('%K{232}▁' '%K{232}▂' '%K{232}▃' '%K{232}▄' '%K{232}▅' '%K{232}▆' '%K{232}▇' '%K{232}█')
+	typeset -g POWERLEVEL9K_BATTERY_STAGES=("")
+  	# Don't show the remaining time to charge/discharge.
+  	typeset -g POWERLEVEL9K_BATTERY_VERBOSE=false
+	typeset -g POWERLEVEL9K_BATTERY_VISUAL_IDENTIFIER_EXPANSION=''
+
 
 
     (( ! $+functions[p10k] )) || p10k reload
